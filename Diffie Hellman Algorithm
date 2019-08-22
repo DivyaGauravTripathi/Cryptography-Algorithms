@@ -1,0 +1,29 @@
+# Alice and Bob decide upon common prime module(mod) and base generator(g). Then they choose their own public keys for this encryption
+
+import random
+
+mod = 13 #prime
+g = 6
+
+print("prime module is %a" %mod)
+print("base generator is %a" %g)
+
+AlicePrivateKey = random.getrandbits(1024)
+AlicePublicKey = pow(g,AlicePrivateKey,mod)
+print("Alice's Public Key: %s" %AlicePublicKey)
+
+BobPrivateKey = random.getrandbits(1024)
+BobPublicKey = pow(g,BobPrivateKey,mod)
+print("Bob's Public Key: %a" %BobPublicKey)
+
+# Bob and Alice would exchange their public keys
+
+AliceSharedKey = pow(BobPublicKey,AlicePrivateKey,mod)
+BobSharedKey = pow(AlicePublicKey,BobPrivateKey,mod)
+
+print("Alice's Shared Key is %a" %AliceSharedKey)
+
+print("Bob's Shared Key is %a" %BobSharedKey)
+
+print("Alice's and Bob's shared keys are equal")
+
